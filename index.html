@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Z-Manager</title>
+  
+  <link href='http://fonts.googleapis.com/css?family=Patua+One'
+        rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="./solarized_dark.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <span id="forkongithub">
+      <a href="https://github.com/NFLabs/z-manager">Fork me on GitHub</a>
+    </span>
+
+    <h1>Z-Manager (beta)</h1>
+    <h5>Simplify Zeppelin installation</h5>
+
+    <div class="js-select-language select-language">
+      <select name="select">
+        <option value="en" selected>English</option> 
+        <option value="kr" disabled>한국어</option>
+        <option value="ru" disabled>Русский</option>
+        <option value="fr" disabled>Français</option>
+        <option value="pt" disabled>Português</option>
+        <option value="az" disabled>Azərbaycanca</option>
+      </select>
+    </div>
+  </header>
+  
+  <article id="js-content" class="content"></article>
+  
+  <footer class="footer">
+    (c) NFLabs
+  </footer>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js">
+  </script>
+  <script>
+    window.marked || document.write(
+      '<script src="js/marked.min.js">\x3C/script>'
+    )
+  </script>
+  <script 
+    src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js">
+  </script>
+  <script>
+    window.hljs || document.write(
+      '<script src="js/highlight.min.js">\x3C/script>'
+    )
+  </script>
+
+  <script>
+
+    hljs.initHighlightingOnLoad();
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false,
+      highlight: function(code) {return hljs.highlightAuto(code).value;}
+    });
+
+    var r = new XMLHttpRequest(); 
+    r.open("GET", "./source-en.md", true); 
+    r.onreadystatechange = function() { 
+      if (r.readyState != 4 || r.status != 200) return; 
+
+      document.getElementById('js-content').innerHTML = marked(r.responseText);
+      [].forEach.call(
+        document.querySelectorAll('pre code'),
+        function(el) {return hljs.highlightBlock(el)}
+      );
+      insertVideo('#video');
+      document.querySelector('.js-select-language').onchange = function(event) {
+        r.open("GET", "source-" + event.target.value + ".md", true);
+        r.send()
+      }
+    }; 
+    r.send();
+
+  </script>
+
+  <script>
+    function insertVideo(id) {
+      var image = document.createElement('img');
+      image.src = "https://raw.githubusercontent.com/NFLabs/z-manager/master/yarn.gif";
+      image.className = "tutorial-video";
+      image.alt = "tutorial-video";
+
+
+      document.querySelector(id)
+        .parentNode
+        .insertBefore(image, document.querySelector(id))
+    }
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-38575365-10', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+</body>
+</html>
