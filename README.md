@@ -8,8 +8,15 @@ It supports external clusters with Standalone, Mesos and YARN resource managers.
 Mode details here http://nflabs.github.io/z-manager
 
 ## How to install
+
+**Interactive CLI UI**
 ```
   curl -fsSL https://raw.githubusercontent.com/NFLabs/z-manager/master/zeppelin-installer.sh | bash
+```
+
+**Non-interatcive CLI**
+```
+./zeppelin-installer.sh -h
 ```
 
 ## Hapoop\Spark compatibility

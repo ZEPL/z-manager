@@ -10,17 +10,20 @@ readonly HADOOP_LATEST='2.4.0'
 
 readonly product_zeppelin='Apache Zeppelin (incubating)'
 readonly product_manager='Z-Manager'
+readonly product_manager_site='http://nflabs.github.io/z-manager'
+readonly product_manager_descr="${product_manager} is a simple tool that automates process of
+getting Zeppelin up and running on your environment."
 readonly please_enter='Please enter'
 
 
 
-readonly gdrive="http://googledrive.com/host/0B0q6JdSf3mukfkF4Y1dkTjdNdk9wVmNRalY5dWlOTUV1QlpITUFXZWJSdjRRNkNXcFRUQ1k"
+readonly server="https://bb9cd3fe863912d219e86eb3535ce4370eb32f19.googledrive.com/host/0B0q6JdSf3mukfkF4Y1dkTjdNdk9wVmNRalY5dWlOTUV1QlpITUFXZWJSdjRRNkNXcFRUQ1k"
 
 
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
 }
-log() { #TODO(alex): add 'debug' switch
+log() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
 }
 
@@ -34,6 +37,7 @@ E_BAD_LOGIN=107
 E_BAD_READ=108
 E_BAD_UI_PARAMS=109
 E_NO_CURL_WGET=110
+E_UNSUPPORTED_VER=111
 
 #Interface between UI and Installer: 5 basic vars + 5 for resource manager
 zeppelin_ver="${ZEPPELIN_LATEST}"
@@ -209,7 +213,7 @@ install_confirmation() {
   print_if_not_empty "Spark version" "$SPARK_VERSION"
   print_if_not_empty "Hadoop version" "$HADOOP_VERSION"
 
-  if [ -z "$SPARK_MASTER_URL" ]; then
+  if [[ -z "$SPARK_MASTER_URL" ]]; then
     echo "Spark master URL: None"
   else
     print_if_not_empty  "Spark master URL" "$SPARK_MASTER_URL"
@@ -253,7 +257,7 @@ persist () {
     exit "${E_BAD_UI_PARAMS}"
   fi
 
-  i=0
+  local i=0
   for arg in "$@" ; do
     if [[ "${i}" = 0 ]]; then
       echo "${arg}" > "${persist_filename}"
@@ -272,7 +276,7 @@ show_history () {
   echo
 
   local -a user_params
-  i=0
+  local i=0
   while read line; do
     user_params[i]="${line}"
     i=$(($i + 1))
@@ -285,7 +289,7 @@ show_history () {
 
   print_if_not_empty "Spark version" "${user_params[0]}"
   print_if_not_empty "Hadoop version" "${user_params[1]}"
-  if [ -z "${user_params[2]}" ]; then
+  if [[ -z "${user_params[2]}" ]]; then
     echo "Spark master URL: None"
   else
     print_if_not_empty  "Spark master URL" "${user_params[2]}"
@@ -493,6 +497,94 @@ get_new_settings() {
 }
 
 
+##############################################################
+# check if $1 is contained in the rest of input args
+# Globals:
+#   None
+# Arguments:
+#   n arguments
+#     1st argument - target value
+#     2nd ... n - values to compare with, usually passed as array.
+# Assumptions:
+#     arguments from 2 to n are considered to be unique (Unique hadoop, spark versions)
+# Returns:
+#    'true' if $1 is contained in array (function return 0)
+#    'false' otherwise (function return 1)
+##############################################################
+contains() {
+  local val=""
+  local i=0
+  for arg in "$@" ; do
+    if [[ "${i}" = "0" ]]; then
+      val="${arg}"
+    else
+      if [[ "${val}" = "${arg}" ]]; then
+        echo 'true'
+        return 0
+      fi
+    fi
+    i=$(($i + 1))
+  done
+  echo 'false'
+  return 1
+}
+
+# print input arguments
+print_versions()
+  for arg in "$@" ; do
+    echo "${arg}"
+  done
+}
+
+#User input validation
+fail_if_unsupported_spark() {
+  local spark="$1"
+  if [[ "$(contains "${spark}" "${spark_versions[@]}")" = 'false' ]]; then
+    err "Spark ${spark} is not supported. Currently supported versions of Spark are:"
+    print_versions "${spark_versions[@]}"
+    exit "${E_UNSUPPORTED_VER}"
+  fi
+}
+
+fail_if_unsupported_hadoop_spark() {
+  local hadoop="$1"
+  local spark="$2"
+
+  local fail_message="Zeppelin for Spark ${spark} does not support Hadoop version ${hadoop}
+Please build from sources using instructions at https://zeppelin.incubator.apache.org/docs/install/install.html
+Supported versions of Hadoop for Spark ${spark} are:"
+
+  case "${spark}" in
+    "${spark_versions[0]}")
+      if [[ "$(contains "${hadoop}" "${hadoopv_spark_1_3_1[@]}")" = 'false' ]]; then
+        echo "${fail_message}"
+        print_versions "${hadoopv_spark_1_3_1[@]}"
+        exit "${E_UNSUPPORTED_VER}"
+      fi
+      ;;
+    "${spark_versions[1]}")
+      if [[ "$(contains "${hadoop}" "${hadoopv_spark_1_3_0[@]}")" = 'false' ]]; then
+        err "${fail_message}"
+        print_versions "${hadoopv_spark_1_3_0[@]}"
+        exit "${E_UNSUPPORTED_VER}"
+      fi
+      ;;
+    "${spark_versions[2]}")
+      if [[ "$(contains "${hadoop}" "${hadoopv_spark_1_4_0[@]}")" = 'false' ]]; then
+        err "${fail_message}"
+        print_versions "${hadoopv_spark_1_4_0[@]}"
+        exit "${E_UNSUPPORTED_VER}"
+      fi
+      ;;
+    *)
+      err "Spark ${spark} is not supported"
+      exit "${E_UNSUPPORTED_VER}"
+      ;;
+  esac
+
+}
+
+
 
 ##############################################################
 # Get user parameters and save them into four global variables
@@ -538,10 +630,10 @@ start_ui () {
 
 
 ##############################################################
-# Helper function to download given filename from public GDrive
+# Helper function to download given filename from public Server
 # Does not retry for now.
 # Globals:
-#   gdrive     - url to public folder
+#   server     - url to public folder
 # Arguments:
 #   filename   - name of the file to download
 # Returns:
@@ -549,22 +641,25 @@ start_ui () {
 ##############################################################
 util::download_if_not_exits() {
   local filename="$1"
-  local src_url="${gdrive}/${filename}"
+  local src_url="${server}/${filename}"
 
   if [[ -e "${filename}" ]]; then
     log "Skip downloading ${filename} as it exisits"
     return 0  
   fi
 
-  curl -kL --progress-bar -O "${src_url}"
-  if [[ "$?" -ne 0 ]]; then #TODO(alex): would be nice to retry
-    err "Unable to download ${build_filename} from ${src_url}" >&2
+  local http_status="200"
+  http_status="$(curl -k -w "%{http_code}" --progress-bar -O "${src_url}")"
+  if [[ "$?" -ne 0 ]] || [[ "${http_status}" != "200" ]]; then
+    #TODO(bzz): would be nice to retry
+    err "Unable to download ${build_filename} from ${server}" >&2
+    rm -f "${filename}"
     exit "${E_BAD_CURL}"
   fi
 }
 
 util::count() {
-  if [[ "${COUNT}" = true ]] ; then
+  if [[ "${COUNT}" = 'true' ]] ; then
     local tid="UA-38575365-10"
     local cid
     cid="$(echo $$)"
@@ -598,7 +693,7 @@ download_zeppelin() {
   local build_filename="$1"
   log "Downloading ${product_zeppelin} from ${build_filename}..."
 
-  #TODO(alex): ~200mb, so re-try would make sense
+  #TODO(bzz): ~200mb, so re-try would make sense
   util::download_if_not_exits "${build_filename}"
   util::count
   log "Done"
@@ -718,7 +813,7 @@ deduce_pyspark_path() {
   local spark="$1"
 
   local zipfile=""
-  #TODO(alex): replace with
+  #TODO(bzz): replace with
   #zipfile="$(find "${yarn_spark_home}/python/lib" "-name" "py4j-*")"
   zipfile="${spark}/python/lib/py4j-0.8.2.1-src.zip"
   echo "${spark}/python:${zipfile}"
@@ -752,8 +847,42 @@ print_instructions_to_run() {
   echo " and visit http://localhost:${zeppelin_port}"
 }
 
+# Prints CLI usage information for -h|--help
+print_usage() {
+  local exec="${0##*/}"
+  echo "Usage: ./${exec} [options]"
+
+
+  echo
+  echo "${product_manager_descr}"
+  echo
+  echo "Options:"
+  echo "  -h, --help                      shows this help message and exit"
+  echo "  -k, --spark-ver                 set Spark version (default: ${SPARK_VERSION})"
+  echo "  -p, --hadoop-ver                set Hadoop version (default: ${HADOOP_VERSION})"
+  echo "  -e, --spark-home                set SPARK_HOME dir"
+  echo "  -c, --yarn-hadoop-conf-dir      set HADOOP_CONF_DIR"
+  echo "  -n, --mesos-native-java-lib     set Mesos native java lib path"
+  echo "  -u, --mesos-spark-executor-uri  set Mesos Spark executor URI"
+  echo "  -z, --zeppelin-port             set Spark master URL"
+
+  echo "  -n, --no-count                  opt-out from instalation statistics"
+
+  echo
+  echo "For more information, updates and news, 
+visit the ${product_manager} website:
+${product_manager_site}"
+  echo
+}
+
+
+
+################################
+#         CLI
+################################
 
 COUNT='true'
+DEFAULT='true'
 while [[ $# > 0 ]] ; do
   key="$1"
   case $key in
@@ -761,16 +890,58 @@ while [[ $# > 0 ]] ; do
     COUNT='false'
     shift
     ;;
-    -s|--spark-version)
-    spark_ver="$2"
+
+    -k|--spark-ver)
+    SPARK_VERSION="$2"
+    fail_if_unsupported_spark "${SPARK_VERSION}"
+    DEFAULT='false'
     shift
     ;;
-    -h|--hadoop-version)
-    hadoop_ver="$2"
+
+    -p|--hadoop-ver)
+    HADOOP_VERSION="$2"
+    DEFAULT='false'
     shift
     ;;
-    --default)
-    DEFAULT=YES
+
+    -m|--master-url)
+    SPARK_MASTER_URL="$2"
+    DEFAULT='false'
+    shift
+    ;;
+
+    -e|--spark-home)
+    YARN_SPARK_HOME="$2"
+    DEFAULT='false'
+    shift
+    ;;
+
+    -c|--yarn-hadoop-conf-dir)
+    YARN_HADOOP_HOME_CONF_DIR="$2"
+    DEFAULT='false'
+    shift
+    ;;
+
+    -n|--mesos-native-java-lib)
+    MESOS_NATIVE_JAVA_LIB="$2"
+    DEFAULT='false'
+    shift
+    ;;
+
+    -u|--mesos-spark-executor-uri)
+    MESOS_SPARK_EXECUTOR_URI="$2"
+    DEFAULT='false'
+    shift
+    ;;
+    
+    -z|--zeppelin-port)
+    ZEPPELIN_PORT="$2"
+    DEFAULT='false'
+    shift
+    ;;
+
+    -h|--help)
+    print_usage && exit 0
     ;;
     *)
             # unknown option
@@ -779,10 +950,14 @@ while [[ $# > 0 ]] ; do
 shift
 done
 readonly COUNT
+readonly DEFAULT
 
-
-#go through getting parameters via UI
-start_ui
+if [[ "${DEFAULT}" = 'true' ]]; then #go through interactive UI
+  start_ui
+else
+  fail_if_unsupported_hadoop_spark "${HADOOP_VERSION}" "${SPARK_VERSION}"
+#  install_confirmation
+fi
 
 #pass parameters from user
 spark_ver="${SPARK_VERSION}"
