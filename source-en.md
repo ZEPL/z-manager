@@ -38,10 +38,12 @@ Please mind that it's in early stage right now.
 
 
 
-### That is how it looks like
-Z-Manager have a simple command line interface:
+### UI: interactive CLI
+Z-Manager have a simple interactive command line interface:
 <div id="video"></div>
 
+### UI: non-interactive CLI
+In case you want to install Zeppelin in a non-interactive fashion, run `./zeppelin-installer.sh -h` and provide the options though arguments.
 
 
 ## What is happening underneath?
