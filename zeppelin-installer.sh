@@ -17,8 +17,7 @@ readonly please_enter='Please enter'
 
 
 
-readonly server="https://bb9cd3fe863912d219e86eb3535ce4370eb32f19.googledrive.com/host/0B0q6JdSf3mukfkF4Y1dkTjdNdk9wVmNRalY5dWlOTUV1QlpITUFXZWJSdjRRNkNXcFRUQ1k"
-
+readonly server="https://zeppel.in.s3.amazonaws.com"
 
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
@@ -126,19 +125,19 @@ get_hadoop_version() {
   #TODO(khalid): make one -case statement in the beginning and pass required array
   case "${sparkv_index}" in
     1)
-      for i in $(seq 1 ${#hadoopv_spark_1_3_1[@]}); do
+      for ((i=1; i<="${#hadoopv_spark_1_3_1[@]}"; i++)); do
         echo "${i}. Hadoop ${hadoopv_spark_1_3_1[$i-1]}"
       done
       len="${#hadoopv_spark_1_3_1[@]}"
       ;;
     2)
-      for i in $(seq 1 ${#hadoopv_spark_1_3_0[@]}); do
+      for ((i=1; i<="${#hadoopv_spark_1_3_0[@]}"; i++)); do
         echo "${i}. Hadoop ${hadoopv_spark_1_3_0[$i-1]}"
       done
       len="${#hadoopv_spark_1_3_0[@]}"
       ;;
     3)
-      for i in $(seq 1 ${#hadoopv_spark_1_4_0[@]}); do
+      for ((i=1; i<="${#hadoopv_spark_1_4_0[@]}"; i++)); do
         echo "${i}. Hadoop ${hadoopv_spark_1_4_0[$i-1]}"
       done
       len="${#hadoopv_spark_1_4_0[@]}"
@@ -167,7 +166,7 @@ get_hadoop_version() {
 get_spark_version() {
   echo
   echo 'Please select one of the following Spark releases'
-  for i in $(seq 1 ${#spark_versions[@]}); do
+  for ((i=1; i<="${#spark_versions[@]}"; i++)); do
     if [[ "${spark_versions[$i-1]}" = "${spark_latestt}" ]]; then
       echo "${i}. Spark ${spark_versions[$i-1]} (latest)"
     elif [[ "${spark_versions[$i-1]}" = "${spark_experimental}" ]]; then
@@ -250,7 +249,7 @@ install_confirmation() {
 
 # persist config parameters into the ${persist_filename} in the current folder.
 # overwrite previous file in case of successful installation.
-persist () {
+persist() {
 
   if [[ ! "${#}" = "${num_ui_params}" ]]; then
     err "Number of installation parameters is different from ${num_ui_params}"
@@ -264,13 +263,13 @@ persist () {
     else
       echo "${arg}" >> "${persist_filename}"
     fi
-    i=$(($i + 1))
+    i="$(($i + 1))"
   done
 
 }
 
 # show user preferences on previous installation; ask for reuse
-show_history () {
+show_history() {
   echo
   echo 'Previous installation history exists in this folder'
   echo
@@ -279,7 +278,7 @@ show_history () {
   local i=0
   while read line; do
     user_params[i]="${line}"
-    i=$(($i + 1))
+    i="$(($i + 1))"
   done < "${persist_filename}"
 
   if [[ ! "${i}" = "${num_ui_params}" ]]; then
@@ -303,7 +302,7 @@ show_history () {
 
 
   echo
-  echo "Would you like to reuse last intallation setting? y(es)/n(o)"
+  echo "Would you like to reuse last installation setting? y(es)/n(o)"
   read yn </dev/tty
 
   while ! [[ "${yn}" =~ $re_yn ]]; do
@@ -523,14 +522,14 @@ contains() {
         return 0
       fi
     fi
-    i=$(($i + 1))
+    i="$(($i + 1))"
   done
   echo 'false'
   return 1
 }
 
 # print input arguments
-print_versions()
+print_versions() {
   for arg in "$@" ; do
     echo "${arg}"
   done
@@ -598,7 +597,7 @@ Supported versions of Hadoop for Spark ${spark} are:"
 # Returns:
 #   None
 ##############################################################
-start_ui () {
+start_ui() {
   echo
   echo "Welcome to ${product_manager}!"
   local use_last_setting=1
@@ -649,7 +648,7 @@ util::download_if_not_exits() {
   fi
 
   local http_status="200"
-  http_status="$(curl -k -w "%{http_code}" --progress-bar -O "${src_url}")"
+  http_status="$(curl -Ok -w "%{http_code}" --progress-bar "${src_url}")"
   if [[ "$?" -ne 0 ]] || [[ "${http_status}" != "200" ]]; then
     #TODO(bzz): would be nice to retry
     err "Unable to download ${build_filename} from ${server}" >&2
@@ -776,7 +775,7 @@ configure_interpreter() {
   log "Done"
 
   local python_path
-  python_path=$(deduce_pyspark_path "${spark_home}")
+  python_path="$(deduce_pyspark_path "${spark_home}")"
   log "Pyspark found at ${python_path}"
   template_zeppelin_env 'zeppelin-env.sh' \
                         "${hadoop_conf_dir}" \
@@ -799,7 +798,7 @@ template_interp_json() {
 
   log "  Reading the ${filename}"
   local file1
-  file1=$(<"${filename}")
+  file1="$(<"${filename}")"
   file1=${file1/<%spark_master_url%>/"${master_url}"}
   file1=${file1/<%spark_app_name%>/"${app_name}"}
   file1=${file1/<%spark_home%>/"${spark_home}"}
@@ -828,7 +827,7 @@ template_zeppelin_env() {
   
   log "  Reading the ${filename}"
   local file1
-  file1=$(<"${filename}")
+  file1="$(<"${filename}")"
   file1=${file1/<%hadoop_home_conf_dir%>/"${hadoop_home_conf_dir}"}
   file1=${file1/<%mesos_native_java_lib%>/"${mesos_native_java_lib}"}
   file1=${file1/<%python_path%>/"${python_path}"}
