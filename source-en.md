@@ -86,7 +86,8 @@ $find .
   ...
 ```
 
-
+### Feedback & Questions
+If you have any comments, questions, or suggestions for Z-Manager please feel free to file a [new issue](https://github.com/NFLabs/z-manager/issues).
 
 ## Further work
 We are planning a full featured GUI version of manager soon, with more external integrations and pre-sets
