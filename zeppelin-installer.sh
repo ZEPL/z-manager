@@ -59,12 +59,12 @@ zeppelin_port="8080"
 
 declare -a spark_versions=('1.3.1' '1.3.0' '1.4.0')
 declare -a hadoopv_spark_1_3_0=('2.0.0-cdh4.7.1')
-declare -a hadoopv_spark_1_3_1=('1.0.4' '2.4.0' '2.0.0-cdh4.7.1' '2.5.0-cdh5.3.0')
+declare -a hadoopv_spark_1_3_1=('2.4.0' '2.0.0-cdh4.7.1' '2.5.0-cdh5.3.0')
 declare -a hadoopv_spark_1_4_0=('2.6.0')
 declare -r hadoop_default='2.4.0'
 declare -r spark_default='1.3.1'
-declare -r spark_latestt='1.3.1'
-declare -r spark_experimental='1.4.0'
+declare -r spark_latestt='1.4.0'
+declare -r spark_experimental=''
 declare -r persist_filename='.zep'
 declare -r re_yn='^[Yy]$|^[yY][eE][sS]$|^[Nn]$|^[nN][oO]$'
 declare -r re_y='^[Yy]$|^[yY][eE][sS]$'
@@ -169,7 +169,8 @@ get_spark_version() {
   for ((i=1; i<="${#spark_versions[@]}"; i++)); do
     if [[ "${spark_versions[$i-1]}" = "${spark_latestt}" ]]; then
       echo "${i}. Spark ${spark_versions[$i-1]} (latest)"
-    elif [[ "${spark_versions[$i-1]}" = "${spark_experimental}" ]]; then
+    elif [[ -n "${spark_experimental}" ]] &&
+         [[ "${spark_versions[$i-1]}" = "${spark_experimental}" ]]; then
       echo "${i}. Spark ${spark_versions[$i-1]} (experimental)"
     else
       echo "${i}. Spark ${spark_versions[$i-1]}"
@@ -630,7 +631,7 @@ start_ui() {
 
 ##############################################################
 # Helper function to download given filename from public Server
-# Does not retry for now.
+#
 # Globals:
 #   server     - url to public folder
 # Arguments:
@@ -648,9 +649,8 @@ util::download_if_not_exits() {
   fi
 
   local http_status="200"
-  http_status="$(curl -Ok -w "%{http_code}" --progress-bar "${src_url}")"
+  http_status="$(curl -Ok -w "%{http_code}" --retry 3 --progress-bar "${src_url}")"
   if [[ "$?" -ne 0 ]] || [[ "${http_status}" != "200" ]]; then
-    #TODO(bzz): would be nice to retry
     err "Unable to download ${build_filename} from ${server}" >&2
     rm -f "${filename}"
     exit "${E_BAD_CURL}"
@@ -692,7 +692,6 @@ download_zeppelin() {
   local build_filename="$1"
   log "Downloading ${product_zeppelin} from ${build_filename}..."
 
-  #TODO(bzz): ~200mb, so re-try would make sense
   util::download_if_not_exits "${build_filename}"
   util::count
   log "Done"

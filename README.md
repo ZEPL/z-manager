@@ -21,9 +21,9 @@ Mode details here http://nflabs.github.io/z-manager
 
 ## Hapoop\Spark compatibility
 
-|                      |  1.2.1 |  1.3.0 | 1.3.1|1.4.0 (experimental)|
+|                      |  1.2.1 |  1.3.0 | 1.3.1|1.4.0  |
 | -------------------- | :----: | :----: | :---:|:-----:|
-|  1.x                 |        |        |   x  |
+|  1.x                 |        |        |      |
 |  2.3                 |        |        |      |
 |  2.4 and later       |        |        |   x  |
 |  2.6                 |        |        |      |   x   |
