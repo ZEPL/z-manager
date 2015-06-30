@@ -73,6 +73,9 @@
       if (r.readyState != 4 || r.status != 200) return; 
 
       document.getElementById('js-content').innerHTML = marked(r.responseText);
+      if (location.hash) {
+        document.querySelector(location.hash).scrollIntoView(true);
+      };
       [].forEach.call(
         document.querySelectorAll('pre code'),
         function(el) {return hljs.highlightBlock(el)}

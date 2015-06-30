@@ -9,9 +9,12 @@ The script explains what it will do and then pauses before doing it.
 
 
 ##
+<a href="#what-is-z-manager-">
 ### What is Z-Manager?
+</a>
 A simple tool that automates process of getting Zeppelin up and running
 
+<br/>
 **Value proposition:**
   - *No Build*
 
@@ -21,12 +24,15 @@ A simple tool that automates process of getting Zeppelin up and running
 
     No need for manual configuration. Just pick Hadoop and Spark version though the installation.
 
+
+<a href="#who-should-use-it-">
 ### Who should use it?
+</a>
 Anybody who want to try Zeppelin and save some time on building\configuration process should
 
 ### Why?
 > Installing and configuring Zeppelin is a laborious process: you need to build
-  Zeppelin using [right set of parameters]() that depends on your setup.
+  Zeppelin using [right set of parameters](http://zeppelin.incubator.apache.org/docs/install/install.html) that depends on your setup.
   Z-Manager allows you to skip it by asking few questions and downloading everything.
 
 ### When?
@@ -37,12 +43,15 @@ Please mind that it's in early stage right now.
 
 
 
-
+<a href="#ui-interactive-cli">
 ### UI: interactive CLI
+</a>
 Z-Manager have a simple interactive command line interface:
 <div id="video"></div>
 
+<a href="#ui-non-interactive-cli">
 ### UI: non-interactive CLI
+</a>
 In case you want to install Zeppelin in a non-interactive fashion, run `./zeppelin-installer.sh -h` and provide the options though arguments.
 
 
@@ -53,8 +62,9 @@ In case you want to install Zeppelin in a non-interactive fashion, run `./zeppel
 Z-Manager download and unpacks [Apache Zeppelin (incubating)](zeppelin.incubator.apache.org) on your machine.
 By picking right spark and hadoop version and downloading binary it frees you from building Zeppelin from sources.
 
-
+<a href="#configure-zeppelin">
 ### Configure Zeppelin
+</a>
 
 Configure Spark cluster mode using one of the following presets
   - Standalone
@@ -62,8 +72,9 @@ Configure Spark cluster mode using one of the following presets
   - Mesos
 
 
-
+<a href="#see-what-s-installed">
 ### See what's installed
+</a>
 
 Z-Manager will install latest Zeppelin in current directory and touch nothing else.
 Then you can move a Zeppelin installation wherever you like.
@@ -86,7 +97,9 @@ $find .
   ...
 ```
 
+<a href="#what-is-z-manager-">
 ### Feedback & Questions
+</a>
 If you have any comments, questions, or suggestions for Z-Manager please feel free to file a [new issue](https://github.com/NFLabs/z-manager/issues).
 
 ## Further work
