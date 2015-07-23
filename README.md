@@ -21,24 +21,25 @@ Mode details here http://nflabs.github.io/z-manager
 
 ## Hapoop\Spark compatibility
 
-|                      |  1.2.1 |  1.3.0 | 1.3.1|1.4.0  |
-| -------------------- | :----: | :----: | :---:|:-----:|
-|  1.x                 |        |        |      |
-|  2.3                 |        |        |      |
-|  2.4 and later       |        |        |   x  |
-|  2.6                 |        |        |      |   x   |
-|  CDH4: 2.0.0-cdh4.7.1|        |    x   |   x  |
-|  CDH5: 2.5.0-cdh5.3.0|        |        |   x  |
-|  HDP?                |        |        |      |
-|  MapR 3.x            |        |        |      |
-|  MapR 4.x            |        |        |      |
+|                      |  1.2.1 |  1.3.0 | 1.3.1|1.4.0  |1.4.1 |
+| -------------------- | :----: | :----: | :---:|:-----:|:----:|
+|  1.x                 |        |        |      |       |   x  |
+|  2.3                 |        |        |      |       |      |
+|  2.4 and later       |        |        |   x  |       |      |
+|  2.6                 |        |        |      |   x   |      |
+|  2.7.1               |        |        |      |       |   x  |
+|  CDH4: 2.0.0-cdh4.7.1|        |    x   |   x  |   x   |
+|  CDH5: 2.5.0-cdh5.3.0|        |        |   x  |       |
+|  HDP?                |        |        |      |       |
+|  MapR 3.x            |        |        |      |       |
+|  MapR 4.x            |        |        |      |       |
 
 
-  
+
 ## Example
 ![Video of Z-Manager](https://raw.githubusercontent.com/NFLabs/z-manager/master/yarn.gif)
 
-  
+
 **Disclaimer**
 
 >Z-Manager does not collect any personal information.

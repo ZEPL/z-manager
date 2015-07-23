@@ -4,7 +4,7 @@
 
 { # Prevent execution if this script was only partially downloaded
 
-readonly ZEPPELIN_LATEST="0.5.0-incubating-SNAPSHOT"
+readonly ZEPPELIN_LATEST="0.6.0-incubating-SNAPSHOT"
 readonly SPARK_LATEST='1.3.1'
 readonly HADOOP_LATEST='2.4.0'
 
@@ -57,13 +57,14 @@ zeppelin_port="8080"
 # Gets the configuration variables from the user
 ##############################################################
 
-declare -a spark_versions=('1.3.1' '1.3.0' '1.4.0')
+declare -a spark_versions=('1.3.1' '1.3.0' '1.4.0' '1.4.1')
 declare -a hadoopv_spark_1_3_0=('2.0.0-cdh4.7.1')
 declare -a hadoopv_spark_1_3_1=('2.4.0' '2.0.0-cdh4.7.1' '2.5.0-cdh5.3.0')
-declare -a hadoopv_spark_1_4_0=('2.6.0')
+declare -a hadoopv_spark_1_4_0=('2.6.0' '2.0.0-cdh4.7.1')
+declare -a hadoopv_spark_1_4_1=('1.0.4' '2.7.1')
 declare -r hadoop_default='2.4.0'
 declare -r spark_default='1.3.1'
-declare -r spark_latestt='1.4.0'
+declare -r spark_latestt='1.4.1'
 declare -r spark_experimental=''
 declare -r persist_filename='.zep'
 declare -r re_yn='^[Yy]$|^[yY][eE][sS]$|^[Nn]$|^[nN][oO]$'
@@ -142,6 +143,12 @@ get_hadoop_version() {
       done
       len="${#hadoopv_spark_1_4_0[@]}"
       ;;
+    4)
+      for ((i=1; i<="${#hadoopv_spark_1_4_1[@]}"; i++)); do
+        echo "${i}. Hadoop ${hadoopv_spark_1_4_1[$i-1]}"
+      done
+      len="${#hadoopv_spark_1_4_1[@]}"
+      ;;
     *)
       err 'Invalid version of Spark'
       exit "${E_BAD_INPUT}"
@@ -205,7 +212,7 @@ print_if_not_empty() {
 
 # requesting user whether to proceed to installation
 install_confirmation() {
-  echo 
+  echo
   echo 'Configuration is finished now,'
   echo 'please review the options you have chosen before installation begins:'
   echo
@@ -229,7 +236,7 @@ install_confirmation() {
 
   echo
   echo 'y(es)/n(o) ?'
-  read yn </dev/tty 
+  read yn </dev/tty
 
   while ! [[ "${yn}" =~ $re_yn ]]; do
     echo "${please_enter} y(es)/n(o)"
@@ -283,8 +290,10 @@ show_history() {
   done < "${persist_filename}"
 
   if [[ ! "${i}" = "${num_ui_params}" ]]; then
-    err "Number of installation parameters is different from ${num_ui_params}"
-    exit "${E_BAD_UI_PARAMS}"
+    echo "Previous configuration file of different version of ${product_manager} detected"
+    echo "Config parameters are different from ${num_ui_params}, restarting ${product_manager}"
+    rm -f "${persist_filename}"
+    start_ui
   fi
 
   print_if_not_empty "Spark version" "${user_params[0]}"
@@ -460,6 +469,7 @@ get_new_settings() {
       1) HADOOP_VERSION="${hadoopv_spark_1_3_1[${hadoop_index}]}" ;;
       2) HADOOP_VERSION="${hadoopv_spark_1_3_0[${hadoop_index}]}" ;;
       3) HADOOP_VERSION="${hadoopv_spark_1_4_0[${hadoop_index}]}" ;;
+      4) HADOOP_VERSION="${hadoopv_spark_1_4_1[${hadoop_index}]}" ;;
       *)
         err 'Wrong Spark selection'
         exit "${E_BAD_INPUT}"
@@ -645,7 +655,7 @@ util::download_if_not_exits() {
 
   if [[ -e "${filename}" ]]; then
     log "Skip downloading ${filename} as it exisits"
-    return 0  
+    return 0
   fi
 
   local http_status="200"
@@ -769,8 +779,10 @@ configure_interpreter() {
 
   # zeppelin-env.sh
   local conf_file='zeppelin-env.sh'
+  
   log "Downloading Zeppelin configuration file ..."
   util::download_if_not_exits "${conf_file}"
+  
   log "Done"
 
   local python_path
@@ -823,7 +835,7 @@ template_zeppelin_env() {
   local hadoop_home_conf_dir="$2"
   local mesos_native_java_lib="$3"
   local python_path="$4"
-  
+
   log "  Reading the ${filename}"
   local file1
   file1="$(<"${filename}")"
@@ -867,7 +879,7 @@ print_usage() {
   echo "  -n, --no-count                  opt-out from instalation statistics"
 
   echo
-  echo "For more information, updates and news, 
+  echo "For more information, updates and news,
 visit the ${product_manager} website:
 ${product_manager_site}"
   echo
@@ -931,7 +943,7 @@ while [[ $# > 0 ]] ; do
     DEFAULT='false'
     shift
     ;;
-    
+
     -z|--zeppelin-port)
     ZEPPELIN_PORT="$2"
     DEFAULT='false'
@@ -979,6 +991,10 @@ Z_DISTR_NAME="${ZEPPELIN}-spark${spark_ver}-hadoop${hadoop_ver}.tar.gz"
 download_zeppelin "${Z_DISTR_NAME}"
 unpack_distr "${Z_DISTR_NAME}" "${ZEPPELIN}"
 
+
+
+
+
 configure_interpreter "${ZEPPELIN}" \
                               "${spark_cluster_master_url}" \
                               "${yarn_spark_home}" \
@@ -986,8 +1002,10 @@ configure_interpreter "${ZEPPELIN}" \
                               "${yarn_hadoop_home_conf_dir}" \
                               "${mesos_native_java_lib}" \
 
-
 print_instructions_to_run
+
+
+
 
 persist "${spark_ver}" \
         "${hadoop_ver}" \
@@ -997,7 +1015,7 @@ persist "${spark_ver}" \
         "${yarn_hadoop_home_conf_dir}" \
         "${mesos_native_java_lib}" \
         "${mesos_spark_executor_uri}" \
-        "${zeppelin_port}"
+        "${zeppelin_port}" \
 
 
 } # End of wrapping
