@@ -1,118 +1,217 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <title>Z-Manager</title>
-  
-  <link href='http://fonts.googleapis.com/css?family=Patua+One'
-        rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="./solarized_dark.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Z-MANAGER</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/animate.min.css" rel="stylesheet"> 
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,500' rel='stylesheet' type='text/css'>
+   
+</head><!--/head-->
+
 <body>
-  <header class="header">
-    <span id="forkongithub">
-      <a href="https://github.com/NFLabs/z-manager">Fork me on GitHub</a>
-    </span>
+	
+  <!--/#header-->
 
-    <h1>Z-Manager (beta)</h1>
-    <h5>Simplify Zeppelin installation</h5>
-
-    <div class="js-select-language select-language">
-      <select name="select">
-        <option value="en" selected>English</option> 
-        <option value="kr" disabled>한국어</option>
-        <option value="ru" disabled>Русский</option>
-        <option value="fr" disabled>Français</option>
-        <option value="pt" disabled>Português</option>
-        <option value="az" disabled>Azərbaycanca</option>
-      </select>
+  <section id="home">
+    <div class="container">
+      <div class="main">
+        <div class="slide-txt">
+          <img class="logo" src="images/home/z_manager_logo.png"/>
+          <h1>Z-MANAGER</h1>
+          <h4>Simplify Apache Zeppelin (incubating) installation</h4>
+          
+        </div>
+        
+      </div>
     </div>
-  </header>
+  </section>
+  <!--/#home-slider-->
+
+  <section id="install">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-sm-12 text-center padding wow fadeInUp" data-wow-duration="500ms" data-wow-delay="100ms">
+          <h2>TO INSTALL ZEPPELIN</h2>
+          <hr class="black">
+        <div class="terminal_bg"><p><font style="color:#66bc46;">curl </font>-fsSL https://raw.githubusercontent.com/NFLabs/z-manager/master/zeppelin-installer.sh | bash</p></div>  
+        <h4>Paste this command-line into a Terminal prompt. The script explains 
+what it will do and then pauses before doing it.</h4>  
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!--/#install-->
+
   
-  <article id="js-content" class="content"></article>
-  
-  <footer class="footer">
-    (c) NFLabs
+
+  <section id="features">
+    <div class="col-sm-12 half_full_left">
+      <div class="container">
+        <div class="col-sm-6 wow leftcolumn fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="50ms" style="visibility: visible; animation-duration: 500ms; animation-delay: 50ms; animation-name: fadeInLeft;">
+          <div class="featured">
+            <h3>WHAT IS Z-MANAGER?</h3>
+            <hr align="left"; class="sm_white" >
+            <h5>
+              A simple tool that automates process of getting Zeppelin up and running.
+              <br />
+              <br />
+Anybody who wants to try Zeppelin and save some time may use it for good.
+            </h5>
+          </div>
+          </div>
+      <div class="col-sm-6 wow leftalign fadeInRight animated" data-wow-duration="500ms" data-wow-delay="50ms" style="visibility: visible; animation-duration: 500ms; animation-delay: 50ms; animation-name: fadeInRight;">
+           <div class="featured">
+            <h4 class="uppercase">Value proposition:</h4>
+            <ul>
+              <li><b>NO BUILD</b></br>
+	No need to build Zeppelin manually, We distribute  
+	up-to-date convenience binaries for you.</li>
+              <li><b>NO CONFIGURATION</b></br>
+	No need for manual configuration. Just pick Hadoop and 
+	Spark version though the installation.</li>
+              <li><b>MULTI-TENANCY</b></br>
+	Run a separate zeppelin instance per user to share same 
+	cluster resources inside yor organization.</li>
+          </ul>
+             </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   <!--/#features-->
+
+  <section id="reasons">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="apache_install wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+             
+            <h3 class="uppercase">Why?</h3>
+            <hr  align="left"; class="sm_black">
+            <h5>Installing and configuring Zeppelin is a laborious process: you need to build Zeppelin using right set of parameters that depends on your setup. Z-Manager allows you to skip it by asking few questions and downloading everything.
+</h5>
+          
+          <h3 class="uppercase">When?</h3>
+            <hr  align="left"; class="sm_black">
+          <h5>Either for trying Zeppelin with Spark (no need for separate Spark installation or existing cluster) or before plugging Zeppelin to your cluster.
+Please mind that it's in early stage right now.</h5>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   </section>
+  <section id="interactive">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="apache_install text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+             
+            <h2 class="uppercase">UI: interactive CLI</h2>
+            <hr class="sm_black">
+            <h5>Z-Manager have a simple interactive command line interface:</h5>
+          <img src="images/home/yarn.gif" width='800px'/>
+          <h4 class="uppercase"><b>UI: non-interactive CLI</b></h4>
+          <h5>In case you want to install Zeppelin in a non-interactive fashion, 
+<br>Run ./zeppelin-installer.sh -h and provide the options though argsuments.</h5>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   </section>
+  <!--/#running-->
+   
+  <section id="underneath">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+             
+            <h2 class="uppercase">What is happening underneath?</h2>
+            <hr class="white">
+            <h5>Z-Manager download and unpacks Apache Zeppelin (incubating) on your machine. <br>By picking right spark and hadoop version and downloading binary it frees you from <br>building Zeppelin from sources.</h5>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   </section>
+  <section id="underneath_list">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="apache_install wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+             
+            <h3 class="uppercase">install</h3>
+            <hr align="left"; class="sm_black">
+            <h5>Z-Manager will install latest Zeppelin in current directory and touch nothing else. Then you can move a Zeppelin installation wherever you like.</h5>
+          
+          <h3 class="uppercase">Configure</h3>
+            <hr align="left"; class="sm_black">
+          <h5>Configure Spark cluster mode using one of the following presets:
+            <ul>
+              <li>Standalone</li>
+              <li>YARN</li>
+              <li>Mesos</li>
+            </ul>
+          </h5>
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   </section>
+  <section id="feedback">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="apache_install text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+             
+            <h2 class="uppercase">Feedback & Questions</h2>
+            <hr class="sm_black">
+            <h4>If you have any comments, questions, or suggestions for Z-Manager 
+<br>please feel free to file <a class="link" href="https://github.com/NFLabs/z-manager/issues">a new issue.</a></h4>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+   </section>
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="copyright-text text-center">
+            <p style="color:#fff;">&copy; NFLabs</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
+  <!--/#footer-->
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js">
-  </script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 
+  <script type="text/javascript" src="js/wow.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>   
   <script>
-    window.marked || document.write(
-      '<script src="js/marked.min.js">\x3C/script>'
-    )
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-38575365-10', 'auto');
+      ga('send', 'pageview');
   </script>
-  <script 
-    src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js">
-  </script>
-  <script>
-    window.hljs || document.write(
-      '<script src="js/highlight.min.js">\x3C/script>'
-    )
-  </script>
-
-  <script>
-
-    hljs.initHighlightingOnLoad();
-    marked.setOptions({
-      renderer: new marked.Renderer(),
-      gfm: true,
-      tables: true,
-      breaks: false,
-      pedantic: false,
-      sanitize: false,
-      smartLists: true,
-      smartypants: false,
-      highlight: function(code) {return hljs.highlightAuto(code).value;}
-    });
-
-    var r = new XMLHttpRequest(); 
-    r.open("GET", "./source-en.md", true); 
-    r.onreadystatechange = function() { 
-      if (r.readyState != 4 || r.status != 200) return; 
-
-      document.getElementById('js-content').innerHTML = marked(r.responseText);
-      if (location.hash) {
-        document.querySelector(location.hash).scrollIntoView(true);
-      };
-      [].forEach.call(
-        document.querySelectorAll('pre code'),
-        function(el) {return hljs.highlightBlock(el)}
-      );
-      insertVideo('#video');
-      document.querySelector('.js-select-language').onchange = function(event) {
-        r.open("GET", "source-" + event.target.value + ".md", true);
-        r.send()
-      }
-    }; 
-    r.send();
-
-  </script>
-
-  <script>
-    function insertVideo(id) {
-      var image = document.createElement('img');
-      image.src = "https://raw.githubusercontent.com/NFLabs/z-manager/master/yarn.gif";
-      image.className = "tutorial-video";
-      image.alt = "tutorial-video";
-
-
-      document.querySelector(id)
-        .parentNode
-        .insertBefore(image, document.querySelector(id))
-    }
-  </script>
-
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-38575365-10', 'auto');
-    ga('send', 'pageview');
-  </script>
-
 </body>
 </html>

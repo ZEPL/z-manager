@@ -1,0 +1,287 @@
+@media only screen and (min-width : 768px) {
+  .nav.navbar-nav > li:hover > ul.sub-menu{
+    display: block;
+    -webkit-animation: fadeInUp 400ms;
+    animation: fadeInUp 400ms;
+  }
+
+  ul.sub-menu {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #fff;
+    padding: 10px 0;
+    width: 240px;
+    box-shadow: none;
+    display: none;
+    z-index: 999;
+    border: 1px solid #dab074;
+  }
+
+  #header .navbar-nav li ul.sub-menu li a {
+    padding-left: 20px;
+  }
+
+
+}
+
+/*md only*/
+@media (min-width: 992px) and (max-width: 1199px) {
+  .col-md-4.portfolio-item{
+    width: 33%;
+  }
+}
+
+/*sm only*/
+@media (min-width: 768px) and (max-width: 991px) {
+  .col-sm-4.portfolio-item{
+    width: 33%;
+  }
+  .half_full_left {
+   background: #ececec url(../images/home/what_zm_1.png); 
+   height:100%;
+   background-size: 100%;  
+   background-repeat:no-repeat
+}
+}
+
+/* md */
+@media only screen and (max-width : 1200px) {
+
+  
+  .half_full_left {
+   background: #ececec url(../images/home/what_zm_1.png); 
+   height:auto;
+   background-size: 50% 100%;  
+   background-repeat:no-repeat
+}
+
+}
+
+/* sm */
+@media only screen and (max-width : 992px) {
+
+  h1{
+    /*font-size: 25px;*/
+  }
+
+  #header .navbar-nav.navbar-right li {
+    padding: 0;
+  }
+
+  #header .navbar-nav.navbar-right >li a {
+    padding: 20px 10px;
+  }
+
+  #home-slider {
+    padding-top: 0px;
+  }
+
+  #home-slider .main-slider {
+    height: 375px;
+  }
+
+  #home-slider .slide-text {
+    top: 0;
+    
+  }
+ .half_full_left {
+   background: #ececec url(../images/home/what_zm_1.png); 
+   height:100%;
+   background-size: 50% 100%;  
+   background-repeat:no-repeat
+}
+  #home-slider h1 {
+    margin-top: 36px;
+  }
+  #install .terminal_bg p {
+   font-size: 1em;   
+   padding:.7em 0 0 0;
+  }
+ #install .terminal_bg{
+   height:40px;
+ 
+  }
+ #underneath .row {
+    padding:60px 0; 
+     
+ }
+  #interactive img{
+   width:100%;   
+  }
+  .featured{
+    padding: 40px 0;   
+  } 
+  .featured h3{
+    margin: 30px 0 0 0 !important;   
+  }     
+
+/* xs */
+@media only screen and (max-width : 768px) {
+
+  h1{
+    font-family: 'Raleway'!important;  
+    font-size: 38px;
+    font-weight: 300;
+  }
+      
+  h2{
+    font-family: 'Raleway'!important;   
+    font-size:28px;
+    margin: 20px 0 !important;
+  }
+  h3{
+    font-family: 'Raleway'!important;   
+    font-size:20px;
+    margin: 30px 0 0px 0 !important;
+  }    
+  h4{
+    font-family: 'Raleway'!important;   
+    font-size:18px;
+    font-weight:400;
+    margin: 10px 0 !important;
+  }
+  h5{
+    font-family: 'Raleway'!important;   
+    font-size:16px;
+    margin: 10px 0 !important;
+  }
+     
+  .padding{
+    padding: 30px 0;
+  }
+    
+  .half_full_left {
+   background: #ececec url(../images/home/what_zm_1.png); 
+   height:100%;
+   background-size: 100% 45%;  
+   background-repeat:no-repeat
+  } 
+  #features .leftalign {
+    padding-left: 0 !important;
+    
+   }   
+  #install h4 {   
+   padding:1em 20px;       
+  }
+  #reasons {
+    padding: 20px 20px 40px 20px;
+  } 
+  #underneath_list {
+    padding: 0px 20px 0px 20px;
+  }
+  #install .terminal_bg{
+   height:60px;
+  } 
+  #install .terminal_bg p {
+   font-size: .8em;  
+   padding:.8em 0em 0 0em;
+      margin:0 !important;
+  }     
+  #install{
+    padding: 20px 0;
+  }  
+  #interactive .row{
+    padding:40px 0 40px 0;   
+  }
+  #interactive img{
+   width:100%;   
+ }
+  #underneath .row{
+    padding:30px 0 40px 0;   
+      
+  }
+  #underneath_list .row{
+    padding:30px 0 60px 0;   
+    
+  }    
+  #feedback .row { 
+    padding:40px 0; 
+  }    
+    
+  #header {
+    padding-bottom: 0px;
+    padding-top: 0px;
+  }
+
+
+  #home-slider {
+    margin: 0px 0px;
+  }
+
+  #home-slider .main-slider {
+    height: 400px;
+  }
+
+  #home-slider .slide-text {
+    top: 0;
+    width: 100%;
+    text-align: center;
+    padding-top:15px;
+  }
+  #home-slider h3{
+    font-family: 'Raleway'!important;   
+    font-size: 16px;
+    padding: 0 15px;
+  }
+  #home-slider .slider-cloud2 {
+    width: 100px;
+  }
+
+
+
+  #action.responsive{
+   
+  }
+
+  .action.take-tour{
+    margin-top: -95px;
+  }
+
+  .action.take-tour .col-sm-7{
+    width: 100%;
+    text-align: center;
+  }
+
+  .action.take-tour .col-sm-5{
+    width: 100%;
+    margin-top: 120px;
+  }
+
+ 
+
+
+  /* 404 error CSS*/
+  #error-page {
+    padding: 50px 25px;
+  }
+
+  #error-page h2 {
+    font-size: 24px;
+  }
+
+  .btn-error {
+    font-size: 13px;
+    padding: 12px 18px;
+  }
+}
+
+@media only screen and (max-width : 480px) {
+
+
+
+  /* 404 error CSS*/
+
+  #error-page {
+    padding: 50px 25px;
+  }
+
+  #error-page h2 {
+    font-size: 24px;
+  }
+
+  .btn-error {
+    font-size: 10px;
+    padding: 12px 11px;
+  }
+}

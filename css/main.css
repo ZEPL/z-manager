@@ -1,0 +1,430 @@
+  body {
+    background: #fff;
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5em;
+    color: #2a3b4d;;
+  }
+
+  html {
+    height: 100%;
+  }
+
+
+  a{
+    color:#eee;
+  }
+
+  .link {
+    color: #299345 
+  }
+
+  .link:hover {
+    color: #6CBD71 
+  }
+
+  a:hover {
+    outline: none;
+    text-decoration:none;
+    color:#fff;
+  }
+
+  a:focus {
+    outline:none;
+    outline-offset: 0;
+  }
+
+  a {
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+  }
+
+
+  ul {
+    list-style: disc;
+    padding-top: 10px !important;
+    padding-left:20px;
+      color: #2a3b4d;
+  }
+
+  h1, h2, h3, h5, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+  }
+
+  h1{
+    color: #FFF;
+    font-size: 64px;
+      font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+      
+  }
+
+  h2{
+    font-weight:400;
+    font-size: 42px;
+    color:#2a3b4d;
+  }
+
+  h3{
+    font-size: 32px;
+    color: #2a3b4d;
+    font-weight:500;
+    line-height: 1.3em;
+    margin-top:60px;
+  }
+  h4{
+    font-size: 24px;
+    color: #2a3b4d;
+    font-weight:400;
+    line-height: 1.3em;
+  }
+  h5{
+    font-size: 18px;
+    color: #2a3b4d;
+    line-height: 1.5em;
+    margin-bottom:0px;
+  }
+  p{
+     margin:0 15px; 
+     color: #2a3b4d;  
+  }
+
+  hr.black{
+     width:70px;
+     height:3px;
+     background-color:#2a3b4d; 
+     border: 0 none;
+      margin-top: 30px;
+      margin-bottom: 40px;
+  }
+  hr.sm_black{
+     width:45px;
+     height:2px;
+     background-color:#2a3b4d; 
+     border: 0 none;
+     margin-top: 20px;
+     margin-bottom: 20px;
+  }
+
+  hr.white{
+     width:70px;
+     height:3px;
+     background-color:#ffffff; 
+     border: 0 none;
+     margin-top: 30px;
+     margin-bottom: 40px;
+  }
+  hr.sm_white{
+     width:45px;
+     height:2px;
+     background-color:#ffffff; 
+        border: 0 none;
+     margin-top: 20px;
+     margin-bottom: 20px;
+  }
+
+  .overflow{
+    overflow: hidden;
+  }
+
+  .uppercase{
+    text-transform: uppercase;
+      padding-top:0px;
+  }
+
+  #install {
+   padding: 60px 0px;   
+  }
+
+  #install .padding{
+    padding: 20px 0;
+  }
+  #install .terminal_bg{
+      background-color: black;
+      height:60px;
+      margin-bottom:10px;
+      width: 100%   
+  }
+  #install .terminal_bg p{
+    font-size: 1.2em;
+    color:#ffffff;
+    padding:1em 0; 
+  }
+  #install h4 {
+    text-align: center;
+    color: #2a3b4d;
+    width:auto;
+    padding: 1em 5em 0 5em;
+  }
+  #action .col-sm-5{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    right: 0;
+  }
+
+  .align-right{
+    text-align: right;
+  }
+
+  .inline{
+    display: inline-block;
+  }
+
+  .padding{
+    padding: 40px 0;
+  }
+
+  .padding-bottom{
+    padding-bottom: 65px;
+  }
+
+  .padding-top{
+    padding-top: 90px;
+  }
+
+  .padding-right{
+    padding-right: 80px;
+  }
+
+  .padding-left{
+    padding-left: 80px;
+  }
+
+  .margin-bottom{
+    margin-bottom: 35px;
+  }
+
+ 
+
+
+
+/*************************
+*******Header******
+**************************/
+
+
+#header{
+  margin-bottom: 0;
+  padding: 30px 0 60px 0;
+}
+
+#header .navbar-inverse .container{
+  position: relative;
+}
+
+
+.scaleIn {
+  -webkit-animation-name: scaleIn;
+  animation-name: scaleIn;
+}
+
+@-webkit-keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+
+/*************************
+*******Footer******
+**************************/
+
+#footer {
+  background: url(../images/home/footer.png) 100% 100% no-repeat;
+     background-size:cover;
+}
+
+#footer p{
+  margin-bottom: 25px;
+}
+
+
+.copyright-text{
+  margin-top: 25px;
+}
+
+/*************************
+*******Home Page******
+**************************/
+
+#home {
+  background: url(../images/home/bg.png) 100% 100% no-repeat;
+  background-size:cover;
+}
+
+#home .main {
+  
+  height: 385px;
+}
+#home .logo {
+  width:76px;
+    height:93px;
+  margin-top:70px;
+  margin-bottom:0px;
+  outline:none;
+  border-style: none;
+  box-shadow: none;
+ 
+}
+
+#home h4 {
+  color:#fff;
+}
+
+#home .slide-txt{
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  text-align:center;
+}
+
+
+.half_full_left {
+   background: #ececec url(../images/home/what_zm_1.png); 
+   height:450px;
+   background-size: 50% 100%;  
+   background-repeat:no-repeat
+}
+
+
+
+#home h1{
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+
+
+
+#features .featured h3, #features .featured h5 {
+    color:#fff;
+    margin-top:0px !important;
+}
+
+#features .leftcolumn {
+    padding-left: 0 !important;   
+    padding-top:40px;
+    
+} 
+#features .leftalign {
+    padding-top:30px;
+}
+.featured{
+   padding: 40px 20px 0 40px;   
+}
+#features .featured li{
+   color:#2a3b4d; 
+   padding-bottom: 20px;    
+}
+#reasons {
+    padding: 40px 0 80px 0;
+}
+
+#interactive {
+  text-align: left;
+    background-color: #ececec;
+    
+}
+#interactive .row {
+ padding:80px 0 80px 0; 
+    
+}
+#interactive .title {
+ padding: 10px 0;   
+    
+}
+#interactive img{   
+  padding:15px 0 30px 0;   
+}
+#underneath {
+  background-image: url(../images/home/underneath.png);
+  height: 365px;
+  width: auto;  
+    
+}
+#underneath .row{
+ padding:80px 0;   
+    
+}
+#underneath h2{
+ color:#fff;      
+}
+#underneath h5{
+ color:#fff;      
+}
+#underneath_list{
+    padding:0;
+    background-color: #ececec;
+}
+#underneath_list .row{
+ padding:20px 0 80px 0;   
+    
+}
+
+#feedback .row { 
+   padding:80px 0; 
+}
+
+.vertical-center{
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  position: statice;
+}
+
+
+.title {
+  color: #ffffff;
+  font-weight: 300;
+  text-align: center;
+}
+
+
+
+
+
+
+/*Features*/
+.feature-inner{
+  text-align: center;
+}
+.icon-wrapper{
+  display: inline-block;
+  background-color: #d29948;
+  color: #fff;
+  padding: 25px;
+  box-shadow: 0 0 0 5px rgba(0,0,0,.1) inset;
+  -webkit-box-shadow: 0 0 0 5px rgba(0,0,0,.1) inset;
+  border-radius: 100%;
+  margin: 10px 0;
+}
