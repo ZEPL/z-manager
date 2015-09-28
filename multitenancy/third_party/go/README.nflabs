@@ -1,0 +1,67 @@
+URL: https://github.com/getlantern/autoupdate
+License: Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Local Modifications:
+  https://github.com/getlantern/autoupdate/pull/2
+  autoupadte.go - Errorf() -> Tracef() in loop() to mute logs
+
+URL: https://github.com/getlantern/autoupdate-server
+License: Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Local Modifications: https://github.com/getlantern/autoupdate-server/pull/1
+
+URL: https://github.com/getlantern/go-update
+License: Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Local Modifications:
+ https://github.com/getlantern/go-update/pull/1 merged
+ Full update implemnted in case of no matching sha256 binary found
+
+URL: https://github.com/getlantern/golog
+License: Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Local Modifications:
+  golog.go - timePrefix() added to log current time
+
+URL: https://github.com/codegangsta/inject
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.
+
+URL: https://github.com/go-martini/martini
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications:
+  martini.go - add time prefix 'LstdFlags' to default logger
+
+URL: https://github.com/martini-contrib/staticbin
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.
+
+URL: https://github.com/martini-contrib/binding
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.
+
+URL: https://github.com/martini-contrib/render
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.
+
+URL: https://github.com/oxtoacart/bpool
+License: Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Local Modifications: No modifications.
+
+URL: https://github.com/martini-contrib/cors
+License: Apache License 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Local Modifications: No modifications.
+
+URL: https://github.com/codegangsta/martini-contrib/tree/master/render
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.
+
+URL: https://github.com/fsouza/go-dockerclient
+License: New BSD License: http://opensource.org/licenses/BSD-3-Clause
+Local Modifications:
+  client.go - expose Client.Endpoint, add newClientFromEnvWithHost()
+TODO(bzz): add transitive deps from `go-dockerclient/external` here
+
+URL: https://github.com/bitly/go-simplejson
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.
+
+URL: https://github.com/koding/websocketproxy
+License: MIT: http://opensource.org/licenses/MIT
+Local Modifications: No modifications.

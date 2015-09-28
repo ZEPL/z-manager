@@ -2,12 +2,22 @@
 > Simplify getting Zeppelin up and running
 
 ## What is Z-Manager
-Z-Manager is a single click installation and configuration tool of Zeppelin with Spark integration.
-It supports external clusters with Standalone, Mesos and YARN resource managers.
+Z-Manager now consists of 2 separate parts:
+  - **Installer** a single click installation and configuration tool of Zeppelin with Spark integration.
+
+  It supports external clusters with Standalone, Mesos and YARN resource managers.
+
+  - **Multi-tenancy** *(New!)*
+
+  Allows you to run a containerized instance of Zeppelin, one per-user with exteranl authentification
 
 Mode details here http://nflabs.github.io/z-manager
 
-## How to install
+## Multi-tenancy
+A single binary app with reverse-proxy to the container fleet of Zeppelin instances.
+See the `./multitenancy/README.md`
+
+## Installer
 
 **Interactive CLI UI**
 ```

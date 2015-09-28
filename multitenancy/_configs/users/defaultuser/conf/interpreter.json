@@ -1,0 +1,126 @@
+{
+    "interpreterSettings": {
+        "2AHG28XSJ": {
+            "group": "md",
+            "option": {
+                "remote": true
+            },
+            "id": "2AHG28XSJ",
+            "interpreterGroup": [
+                {
+                    "class": "com.nflabs.zeppelin.markdown.Markdown",
+                    "name": "md"
+                }
+            ],
+            "properties": {},
+            "name": "md"
+        },
+        "2AEJNH3KK": {
+            "group": "spark",
+            "option": {
+                "remote": true
+            },
+            "id": "2AEJNH3KK",
+            "interpreterGroup": [
+                {
+                    "class": "com.nflabs.zeppelin.spark.SparkInterpreter",
+                    "name": "spark"
+                },
+                {
+                    "class": "com.nflabs.zeppelin.spark.PySparkInterpreter",
+                    "name": "pyspark"
+                },
+                {
+                    "class": "com.nflabs.zeppelin.spark.SparkSqlInterpreter",
+                    "name": "sql"
+                },
+                {
+                    "class": "com.nflabs.zeppelin.spark.DepInterpreter",
+                    "name": "dep"
+                }
+            ],
+            "properties": {
+                "args": "",
+                "zeppelin.spark.useHiveContext": "false",
+                "zeppelin.spark.maxResult": "10000",
+                "master": "local[*]",
+                "spark.cores.max": "",
+                "spark.executor.memory": "512m",
+                "zeppelin.spark.concurrentSQL": "false",
+                "spark.app.name": "Zeppelin"
+            },
+            "name": "spark"
+        },
+        "2AHCKV2A2": {
+            "group": "spark",
+            "option": {
+                "remote": true
+            },
+            "id": "2AHCKV2A2",
+            "interpreterGroup": [
+                {
+                    "class": "com.nflabs.zeppelin.spark.SparkInterpreter",
+                    "name": "spark"
+                },
+                {
+                    "class": "com.nflabs.zeppelin.spark.PySparkInterpreter",
+                    "name": "pyspark"
+                },
+                {
+                    "class": "com.nflabs.zeppelin.spark.SparkSqlInterpreter",
+                    "name": "sql"
+                },
+                {
+                    "class": "com.nflabs.zeppelin.spark.DepInterpreter",
+                    "name": "dep"
+                }
+            ],
+            "properties": {
+                "spark.executor.memory": "3",
+                "spark.sql.parquet.binaryAsString": "true",
+                "spark.home": "/usr/lib/spark",
+                "spark.deploy.recoveryMode": "ZOOKEEPER",
+                "args": "",
+                "spark.yarn.jar": "",
+                "zeppelin.spark.maxResult": "1000",
+                "spark.sql.parquet.compression.codec": "snappy",
+                "master": "spark://localhost:7077",
+                "spark.cores.max": "2",
+                "zeppelin.spark.concurrentSQL": "true",
+                "spark.app.name": "defaultuser"
+            },
+            "name": "spark-cluster"
+        },
+        "2AGQQSEAN": {
+            "group": "sh",
+            "option": {
+                "remote": true
+            },
+            "id": "2AGQQSEAN",
+            "interpreterGroup": [
+                {
+                    "class": "com.nflabs.zeppelin.shell.ShellInterpreter",
+                    "name": "sh"
+                }
+            ],
+            "properties": {},
+            "name": "sh"
+        },
+        "2AJ7D1X15": {
+            "group": "sh",
+            "option": {
+                "remote": true
+            },
+            "id": "2AJ7D1X15",
+            "interpreterGroup": [
+                {
+                    "class": "com.nflabs.zeppelin.shell.ShellInterpreter",
+                    "name": "sh"
+                }
+            ],
+            "properties": {},
+            "name": "test"
+        }
+    },
+    "interpreterBindings": {}
+}
