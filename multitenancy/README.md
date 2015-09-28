@@ -9,6 +9,7 @@ This application allows you to have a single URL where all users go to get their
 
 ## Solution
 ![Multitenancy architecture](https://raw.githubusercontent.com/NFLabs/z-manager/master/multitenancy/architecture.png)
+
 *This is Beta, for now only Spark Standalone is supported*
   
 
