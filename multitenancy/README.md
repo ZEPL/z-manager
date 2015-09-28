@@ -8,7 +8,7 @@ In organization it is not feaseble to make all users install and configure Zeppe
 This application allows you to have a single URL where all users go to get their own, containerized version of Zeppelin, utilasing resources of the shared cluster.
 
 ## Solution
-
+![Multitenancy architecture](https://raw.githubusercontent.com/NFLabs/z-manager/master/multitenancy/architecture.png)
 *This is Beta, for now only Spark Standalone is supported*
   
 
