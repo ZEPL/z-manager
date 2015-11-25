@@ -1,0 +1,5 @@
+server/assets.go
+server/server
+
+#compile-time dependency, fetched by ./build-all.sh
+third_party/go/src/github.com/jteeuwen/
