@@ -28,7 +28,15 @@ See the `./server/z-manager-on-your-cluster.sh` as an example of cluster configu
 
 **Pre-requests**
 
-  * cluster of Docker machines, with HTTP API enabled (see `./_config/dcoker`)
-  * each have `USERS_FOLDER_PATH` mounted to the same location (shared storage)
-  * each have `./_config/find_open_port.py` running (port discovery)
-  * `./z-manager.sh` configured to point to Docker and SparkMaster
+  * cluster of Docker machines, with HTTP API enabled (see example of docker deamon script, updated for HTTP in  `./_config/dcoker`)
+  * each machine have `USERS_FOLDER_PATH` mounted to the same location (shared Notebook storage, each user will have it's own dir)
+  * each machine have `./_config/find_open_port.py` running (free port discovery)
+  * `./z-manager.sh` configured w/ user accounts, pointing to Docker and a SparkMaster URL
+
+
+## Details
+
+Essentially, Z-Manager multitenancy is very simple load-balancer and reverse-proxy with authentification for:
+ - HTTP trafic to zeppelin instances (one per user), run inside Docker containers on one or many machines
+ - Websocket traffic to same zeppelin instances
+ - HTTP traffic to SparkMaster, to get cluster status\available resources

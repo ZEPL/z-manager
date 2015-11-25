@@ -5,8 +5,9 @@
 E_BAD_GOGET=101
 E_BAD_ASSETGEN=102
 E_BAD_GOBUILD=103
+E_BAD_NPM_INSTALL=104
+E_BAD_NPM_RUN=105
 
-#TODO: check for npm
 hash "npm" 2>/dev/null || { echo >&2 "Node.js is not isntalled. Please install it and re-run."; exit 1; }
 hash "go"  2>/dev/null || { echo >&2 "Golang is not isntalled. Please install it and re-run."; exit 1; }
 
@@ -16,13 +17,17 @@ echo "cd web/ui"
 pushd web/ui
 
 echo "npm install"
-npm install
+if ! npm install ; then
+  echo "'npm installed failed'" >&2
+  exit "${E_BAD_NPM_INSTALL}"
+fi
 
 echo "npm run build"
-npm run build
-#TODO(bzz): check for exit-code
+if ! npm run build ; then
+  echo "'npm run dev' failed" >&2
+  exit "${E_BAD_NPM_RUN}"
+fi
 popd
-
 
 #backend
 if [[ -z "${GOPATH}" ]] ; then
@@ -30,6 +35,7 @@ if [[ -z "${GOPATH}" ]] ; then
 else
   export GOPATH="$PWD/third_party/go:$GOPATH"
 fi
+echo "GOPATH set to ${GOPATH}"
 
 echo "cd ../server"
 cd server
